@@ -11,7 +11,7 @@ for i in range(10):
     else:
         if numeros[i] != 0:
             qtd_impar +=1
-print(f"Par: {qtd_par} Impar: {qtd_impar}")
+print(f"Pares: {qtd_par} Ímpares: {qtd_impar}")
     
 
 
