@@ -4,7 +4,7 @@ candidatos = {'kid_bengala': 0, 'mr_catra': 0,'ay_Caramba':0}
 
 for i in range (n):
     print("="*30)
-    print("NÚMEROS DOS RESPECTIVOS ELEITORES")
+    print("NÚMEROS DOS RESPECTIVOS CANDIDATOS")
     print("Kid Bengala: 33 // Mr.Catra: 69 // Ay Caramba: 99")
     print("="*30)
     voto = int(input(f"Voto do {i+1}º eleitor: "))
