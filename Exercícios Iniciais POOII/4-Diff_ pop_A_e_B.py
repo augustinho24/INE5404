@@ -12,4 +12,3 @@ while True:
 print(anos)
 
 
-
