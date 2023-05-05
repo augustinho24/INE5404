@@ -1,8 +1,15 @@
 from locadora_carros import Locadora_de_carros
+
 from veiculo import Veiculo
+from veiculo import cadastrar_veiculo
+from veiculo import alterar_cadastro_veiculo
+from veiculo import excluir_veiculo
+from veiculo import listar_veiculos
 
 locadora_inst = Locadora_de_carros()
 veiculo_inst = Veiculo()
+
+
 
 
 class Pessoa():
@@ -385,7 +392,7 @@ def listar_veiculos_alugados_cliente(cliente):
     print('Veículos alugados:')
     for veiculo in cliente.get_veiculos_alugados():
         print(f'ID: {veiculo.get_id_veiculo()}')
-        print(f'Nome: {veiculo.get_nome()}')
+        print(f'Nome: {veiculo.get_modelo()}')
         print(f'Placa: {veiculo.get_placa()}')
         print(f'Ano: {veiculo.get_ano()}')
         print(f'Cor: {veiculo.get_cor()}')

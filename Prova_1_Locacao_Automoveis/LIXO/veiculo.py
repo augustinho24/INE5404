@@ -97,7 +97,7 @@ def listar_veiculos():
     print('Veículos cadastrados:')
     for veiculo in locadora_inst.get_veiculos_disponiveis():
         print(f'ID: {veiculo.get_id()}')
-        print(f'Nome: {veiculo.get_nome()}')
+        print(f'Nome: {veiculo.get_modelo()}')
         print(f'Placa: {veiculo.get_placa()}')
         print(f'Ano: {veiculo.get_ano()}')
         print(f'Valor da diária: R$ {veiculo.get_valor_diaria()}')
