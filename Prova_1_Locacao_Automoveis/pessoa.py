@@ -47,6 +47,16 @@ class Cliente(Pessoa):
         return self.veiculos_alugados
     def set_veiculos_alugados(self, veiculos_alugados):
         self.veiculos_alugados = veiculos_alugados
+    
+    def adicionar_historico_locacao(self, locacao): #agregar o objeto Locacao no historico de locacao
+        self.historico_locacao.append(locacao)
+    
+    def adicionar_veiculo_alugado(self, veiculo): #agregar o onjeto Veiculo na lista de veiculos alugados
+        self.veiculos_alugados.append(veiculo)
+    
+    def remover_veiculo_alugado(self, veiculo): #remover o objeto Veiculo da lista de veiculos alugados
+        self.veiculos_alugados.remove(veiculo)
+
 
 class Funcionario(Pessoa):
     def __init__(self, nome, cpf, idade, id, senha, salario, cargo):
@@ -63,20 +73,6 @@ class Funcionario(Pessoa):
         return self.cargo
     def set_cargo(self, cargo):
         self.cargo = cargo
-
-
- # Testando a classe
-#pessoa = Pessoa("João", "123.456.789-10", 20, 1, "123")
-#print(pessoa.get_nome())
-#print(pessoa.get_cpf())
-#print(pessoa.get_idade())
-#print(pessoa.get_id_pessoa())
-#print(pessoa.get_senha())
-
-
-
-
-
 
 
 
