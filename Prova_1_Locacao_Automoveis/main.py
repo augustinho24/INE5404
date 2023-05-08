@@ -196,8 +196,6 @@ class Main():
             print("CPF:" ,cliente.get_cpf())
             print("Idade: " ,cliente.get_idade())
             print("ID:" ,cliente.get_id_pessoa())
-            print("Historico de locação: " ,cliente.get_historico_locacao())
-            print("Veiculos alugados: " ,cliente.get_veiculos_alugados())
             print("=" * 30)
         print("=" * 50)
 
@@ -323,54 +321,6 @@ class Main():
 
         print("Alterações realizadas com sucesso")
         self.menu_Funcionario()
-
-    def alterar_Veiculo(self):
-        while True:
-            id_veiculo = input("Digite o id do veiculo (0 para sair): ")
-            if id_veiculo == '0':
-                self.menu_Funcionario()
-            while id_veiculo not in self.ids_veiculos_cadastrados:
-                print("ID não cadastrado")
-                id_veiculo = input("Digite o id do veiculo: ")
-                if id_veiculo == '0':
-                    self.menu_Funcionario()
-            for veiculo in self.lista_Veiculos_disponiveis:
-                if veiculo.get_id_veiculo() == id_veiculo:
-                    print("O que deseja alterar?")
-                    print("1 - Placa\n2 - Marca\n3 - Modelo\n4 - Ano\n5 - Valor da diaria\n6 - Quantidade de portas\n7 - Quantidade de passageiros\n8 - Tipo de cambio\n9 - Sair")
-                    while True:
-                        opcao = int(input("Digite a opção: "))
-                        if opcao == 1:
-                            placa = input("Digite a placa do veiculo: ")
-                            veiculo.set_placa(placa)
-                        elif opcao == 2:
-                            marca = input("Digite a marca do veiculo: ")
-                            veiculo.set_marca(marca)
-                        elif opcao == 3:
-                            modelo = input("Digite o modelo do veiculo: ")
-                            veiculo.set_modelo(modelo)
-                        elif opcao == 4:
-                            ano = input("Digite o ano do veiculo: ")
-                            veiculo.set_ano(ano)
-                        elif opcao == 5:
-                            valor_diaria = float(input("Digite o valor da diaria do veiculo: "))
-                            veiculo.set_valor_diaria(valor_diaria)
-                        elif opcao == 6:
-                            qtd_portas = input("Digite a quantidade de portas do veiculo: ")
-                            veiculo.set_qtd_portas(qtd_portas)
-                        elif opcao == 7:
-                            qtd_passageiros = input("Digite a quantidade de passageiros do veiculo: ")
-                            veiculo.set_qtd_passageiros(qtd_passageiros)
-                        elif opcao == 8:
-                            cambio = input("Digite o tipo de cambio do veiculo: ")
-                            veiculo.set_cambio(cambio)
-                        elif opcao == 9:
-                            break
-                        else:
-                            print("Opção inválida")
-                    print("Alteração realizada com sucesso")
-                    self.menu_Funcionario()
-
     
     def excluir_Cliente(self):
         id = input("Digite o id do cliente que deseja excluir: ")
@@ -406,9 +356,10 @@ class Main():
 
     #Limitar o escopo de acesso do funcionario, ou seja, funções limitadas se e somente se o cargo do funcionário = "Administrador"
     def menu_Funcionario(self):
-        print("="*50)
-        print(f"Bem vindo, {self.funcionario.get_nome()}!")
-        print("=" * 50,"\n")
+        print("="*60)
+        print("Menu Funcionário".center(50))
+        print(f"Bem vindo, {self.funcionario.get_nome()}!".center(50))
+        print("=" * 60,"\n")
         print("1 - Cadastrar Cliente")
         print("2 - Cadastrar Veículo")
         print("3 - Cadastrar Funcionário")
@@ -420,8 +371,11 @@ class Main():
         print("9 - Excluir Funcionário")
         print("10 - Listar Clientes")
         print("11 - Listar Funcionários")
-        print("12 - Listar Veículos")
+        print("12 - Listar Veículos Disponíveis")
+        print("13 - Exibir veículos alugados por um cliente")
+        print("14 - Exibir histórico de alugueis de um cliente")
         print("0 - Sair")
+        print("="*60)
 
         opcao = int(input("Digite a opção desejada: "))
         if opcao == 1:
@@ -491,38 +445,17 @@ class Main():
         elif opcao == 12:
             self.exibir_Veiculos()
             self.menu_Funcionario()
+        elif opcao == 13:
+            self.listar_Veiculos_Alugados_Cliente()
+            self.menu_Funcionario()
+        elif opcao == 14:
+            self.exibir_historico_locacao_Cliente()
+            self.menu_Funcionario()
         elif opcao == 0:
             self.menu()
         else:
             print("Opção inválida")
             self.menu_Funcionario()
-    
-    def menu_Cliente(self):
-        print(f"Bem vindo, {self.cliente.get_nome()}!") 
-        print("1 - Alugar Veículo")
-        print("2 - Devolver Veículo")
-        print("3 - Listar Veículo Alugados")
-        print("4 - Exibir Veículos")
-        print("0 - Sair")
-        opcao = int(input("Digite a opção desejada: "))
-        if opcao == 1:
-            self.alugar_Veiculo()
-            self.menu_Cliente()
-        elif opcao == 2:
-            self.devolver_Veiculo()
-            self.menu_Cliente()
-        elif opcao == 3:
-            self.listar_Veiculos_Alugados_Cliente()
-            self.menu_Cliente()
-        elif opcao == 4:
-           self.exibir_Veiculos()
-           self.menu_Cliente()
-        elif opcao == 0:
-            self.menu()
-        else:
-            print("Opção inválida")
-            self.menu_Cliente()
-    
 
     def login(self):
         id = input("Digite seu ID: ")
@@ -590,8 +523,6 @@ class Main():
         else:
             print("Veículo não encontrado.")
             
-#####################################################################
-
     def listar_Veiculos_Alugados_Cliente(self):
         id_cliente = input("Digite o seu ID: ")
         for cliente in self.lista_Clientes:
@@ -633,14 +564,12 @@ class Main():
                     break
         else:
             print("ID incorreto.")
-
-
-
-##################################################################### ARRUMAR ##########################################
     
     def menu_Cliente(self):
-        print("=" * 30)
-        print(f"Bem vindo, {self.cliente.get_nome()}!", "=" * 30, sep="\n")
+        print("=" * 60)
+        print("Menu Cliente".center(50))
+        print(f"Bem vindo, {self.cliente.get_nome()}!".center(50), "\n")
+        print("=" * 60)
         print("1 - Alugar Veículo")
         print("2 - Devolver Veículo")
         print("3 - Listar Veículo Alugados")
@@ -671,10 +600,12 @@ class Main():
               
     
     def menu(self): # Menu inicial
-        print("\nFogaréu Rent de 30 de Fevereiro\n")
+        print("=" * 60)
+        print("Fogaréu Rent de 30 de Fevereiro".center(60),"\n")
         print("1 - Login")
         print("2 - Cadastro")
         print("0 - Sair")
+        print("=" * 60, "\n")
         opcao = int(input("Digite a opção desejada: "))
         if opcao == 0:
             print("Obrigado por utilizar o sistema de locação de automóveis")
