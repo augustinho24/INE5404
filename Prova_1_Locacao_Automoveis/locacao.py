@@ -25,10 +25,6 @@ class Locacao:
     def set_valor_total(self, valor_total):
         self.valor_total = valor_total
     
-    def calcular_valor_total(self):
-        self.valor_total = self.veiculo.get_valor_diaria() * self.dias
-        return self.valor_total
-
         
     
 
