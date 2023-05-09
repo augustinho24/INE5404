@@ -57,7 +57,6 @@ class Cliente(Pessoa):
     def remover_veiculo_alugado(self, veiculo): #remover o objeto Veiculo da lista de veiculos alugados
         self.veiculos_alugados.remove(veiculo)
 
-
 class Funcionario(Pessoa):
     def __init__(self, nome, cpf, idade, id, senha, salario, cargo):
         super().__init__(nome, cpf, idade, id, senha)
