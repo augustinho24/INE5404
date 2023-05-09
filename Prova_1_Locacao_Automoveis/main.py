@@ -157,7 +157,7 @@ class Main():
         cpf = input("Digite seu cpf: ")
         idade = input("Digite sua idade: ")
         id = input("Digite um id: ")
-        while id in self.ids_cadastrados:
+        while id in self.ids_cadastrados or id == '0':
             print("ID já cadastrado")
             id = input("Digite um ID: ")
         senha = input("Digite uma senha: ")
@@ -177,7 +177,7 @@ class Main():
         cpf = input("Digite seu cpf: ")
         idade = input("Digite sua idade: ")
         id = input("Digite um id: ")
-        while id in self.ids_cadastrados:
+        while id in self.ids_cadastrados or id == '0':
             print("ID já cadastrado")
             id = input("Digite um ID: ")
         senha = input("Digite uma senha: ")
@@ -228,47 +228,50 @@ class Main():
         print("=" * 50)
 
     def alterar_Cliente(self): # Altera os dados de um cliente
-        id = input("Digite o id do cliente que deseja alterar: ")
-        for cliente in self.lista_Clientes:
-            if cliente.get_id_pessoa() == id:
-                self.cliente = cliente
-            else:
-                print("Cliente não encontrado")
+        while True:
+            id_cliente = input("Digite o id do cliente que deseja alterar: ")
+            if id_cliente == '0':
                 self.menu_Funcionario()
-        continuar_alterando = True
-        while continuar_alterando:
-            print("O que deseja alterar? \n")
-            print("1 - Nome\n2 - CPF\n3 - Idade\n4 - ID\n5 - Senha\n6 - Finalizar alteração\n")
-            opcao = int(input("Digite a opção desejada: "))
-            if opcao == 1:
-                nome = input("Digite o novo nome: ")
-                self.cliente.set_nome(nome)
-            elif opcao == 2:
-                cpf = input("Digite o novo cpf: ")
-                self.cliente.set_cpf(cpf)
-            elif opcao == 3:
-                idade = input("Digite a nova idade: ")
-                self.cliente.set_idade(idade)
-            elif opcao == 4:
-                id = input("Digite o novo id: ")
-                while id in self.ids_cadastrados and id != self.cliente.get_id_pessoa():
-                    print("ID já cadastrado")
-                    id = input("Digite um ID: ")
-                #remover o id antigo da lista de ids
-                self.ids_cadastrados.remove(self.cliente.get_id_pessoa())
-                self.cliente.set_id_pessoa(id)
-            elif opcao == 5:
-                senha = input("Digite a nova senha: ")
-                while senha in self.senhas_cadastrados and senha != self.cliente.get_senha():
-                    print("Senha já cadastrada")
-                    senha = input("Digite sua senha: ")
-                #remover a senha antiga da lista de senhas
-                self.senhas_cadastrados.remove(self.cliente.get_senha())
-                self.cliente.set_senha(senha)
-            elif opcao == 6:
-                continuar_alterando = False
-            else:
-                print("Opção inválida")
+            while id_cliente not in self.ids_cadastrados:
+                print("ID não cadastrado")
+                id_cliente = input("Digite o id do cliente que deseja alterar: ")
+                if id_cliente == '0':
+                    self.menu_Funcionario()
+            for cliente in self.lista_Clientes:
+                if cliente.get_id_pessoa() == id_cliente:
+                    print("O que deseja alterar? \n")
+                    print("1 - Nome\n2 - CPF\n3 - Idade\n4 - ID\n5 - Senha\n6 - Sair")
+                    while True:
+                        opcao = int(input("Digite a opção desejada: "))
+                        if opcao == 1:
+                            nome = input("Digite o novo nome: ")
+                            cliente.set_nome(nome)
+                        elif opcao == 2:
+                            cpf = input("Digite o novo cpf: ")
+                            cliente.set_cpf(cpf)
+                        elif opcao == 3:
+                            idade = input("Digite a nova idade: ")
+                            cliente.set_idade(idade)
+                        elif opcao == 4:
+                            id = input("Digite o novo id: ")
+                            while id in self.ids_cadastrados:
+                                print("ID já cadastrado")
+                                id = input("Digite um ID: ")
+                            cliente.set_id_pessoa(id)
+                        elif opcao == 5:
+                            senha = input("Digite a nova senha: ")
+                            while senha in self.senhas_cadastrados:
+                                print("Senha já cadastrada")
+                                senha = input("Digite uma senha: ")
+                            cliente.set_senha(senha)
+                        elif opcao == 6:
+                            break
+                        else:
+                            print("Opção inválida")
+                else:
+                    print("Cliente não encontrado")
+                    break
+            break
         print("Alteração realizada com sucesso")
         self.menu_Funcionario()
 
@@ -297,7 +300,7 @@ class Main():
                 self.funcionario.set_idade(idade)
             elif opcao == 4:
                 id = input("Digite o novo id: ")
-                while id in self.ids_cadastrados and id != self.funcionario.get_id_pessoa():
+                while id in self.ids_cadastrados and id != self.funcionario.get_id_pessoa() and id == '0':
                     print("ID já cadastrado")
                     id = input("Digite um ID: ")
                 #remover o id da lista de ids
@@ -333,7 +336,7 @@ class Main():
                 print("Opção inválida")
 
         print("Alterações realizadas com sucesso")
-        self.menu_Funcionario()
+  
     
     def excluir_Cliente(self): # Exclui um cliente
         id = input("Digite o id do cliente que deseja excluir: ")
@@ -367,7 +370,7 @@ class Main():
         print("Funcionário excluido com sucesso")
         self.menu_Funcionario()
 
-### funções de locação de veículos utilizando a classe locacao ###:
+### funções de locação de veículos utilizando a classe Locacao ###:
 
     def alugar_Veiculo(self): # Função para alugar um veículo
         id_veiculo = input("Digite o ID do veículo: ")
@@ -480,22 +483,22 @@ class Main():
         print("Menu Funcionário".center(50))
         print(f"Bem vindo, {self.funcionario.get_nome()}!".center(50))
         print("=" * 60,"\n")
+        print("0 - Sair")
         print("1 - Cadastrar Cliente")
         print("2 - Cadastrar Veículo")
         print("3 - Cadastrar Funcionário")
         print("4 - Alterar Cliente")
-        print("5 - Alterar Veículo")
-        print("6 - Alterar Funcionário")
+        print("5 - Alterar Funcionario")
+        print("6 - Alterar Veículo")
         print("7 - Excluir Cliente")
-        print("8 - Excluir Veículo")
-        print("9 - Excluir Funcionário")
+        print("8 - Excluir Funcionário")
+        print("9 - Excluir Veículo")
         print("10 - Listar Clientes")
         print("11 - Listar Funcionários")
-        print("12 - Listar Veículos disponíveis")
-        print("13 - Listar Veículos alugados")
-        print("14 - Exibir veículos alugados por um cliente")
-        print("15 - Exibir histórico de alugueis de um cliente")
-        print("0 - Sair")
+        print("12 - Listar Veículos Disponíveis")
+        print("13 - Listar Veículos Alugados")
+        print("14 - Listar Veículos Alugados por Cliente")
+        print("15 - Exibir Histórico de Locações de um Cliente")
         print("=" * 60, "\n")
 
         opcao = int(input("Digite a opção desejada: "))
@@ -515,18 +518,21 @@ class Main():
         elif opcao == 4:
             if self.funcionario.get_cargo() == "Administrador":
                 self.alterar_Cliente()
+                self.menu_Funcionario()
             else:
                 print("Você não tem permissão para realizar essa operação")
                 self.menu_Funcionario()
         elif opcao == 5:
             if self.funcionario.get_cargo() == "Administrador":
                 self.alterar_Funcionario()
+                self.menu_Funcionario()
             else:
                 print("Você não tem permissão para realizar essa operação")
                 self.menu_Funcionario()
         elif opcao == 6:
             if self.funcionario.get_cargo() == "Administrador":
                 self.alterar_Veiculo()
+                self.menu_Funcionario()
             else:
                 print("Você não tem permissão para realizar essa operação")
                 self.menu_Funcionario()
