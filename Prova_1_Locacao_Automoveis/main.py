@@ -203,8 +203,8 @@ class Main():
   
     def exibir_Clientes(self): # Exibe os clientes cadastrados
         print("=" * 50)
+        print("Clientes cadastrados: \n")
         for cliente in self.lista_Clientes:
-            print("Clientes cadastrados: \n")
             print("=" * 30)
             print("Nome: " ,cliente.get_nome())
             print("CPF:" ,cliente.get_cpf())
@@ -215,8 +215,8 @@ class Main():
 
     def exibir_Funcionarios(self): # Exibe os funcionarios cadastrados
         print("=" * 50)
+        print("Funcionários cadastrados: \n")
         for funcionario in self.lista_Funcionarios:
-            print("Funcionários cadastrados: \n")
             print("=" * 30)
             print("Nome: " ,funcionario.get_nome())
             print("CPF:" ,funcionario.get_cpf())
@@ -240,7 +240,7 @@ class Main():
             for cliente in self.lista_Clientes:
                 if cliente.get_id_pessoa() == id_cliente:
                     print("O que deseja alterar? \n")
-                    print("1 - Nome\n2 - CPF\n3 - Idade\n4 - ID\n5 - Senha\n6 - Sair")
+                    print("1 - Nome\n2 - CPF\n3 - Idade\n4 - Senha\n5 - Sair")
                     while True:
                         opcao = int(input("Digite a opção desejada: "))
                         if opcao == 1:
@@ -253,18 +253,12 @@ class Main():
                             idade = input("Digite a nova idade: ")
                             cliente.set_idade(idade)
                         elif opcao == 4:
-                            id = input("Digite o novo id: ")
-                            while id in self.ids_cadastrados:
-                                print("ID já cadastrado")
-                                id = input("Digite um ID: ")
-                            cliente.set_id_pessoa(id)
-                        elif opcao == 5:
                             senha = input("Digite a nova senha: ")
                             while senha in self.senhas_cadastrados:
                                 print("Senha já cadastrada")
                                 senha = input("Digite uma senha: ")
                             cliente.set_senha(senha)
-                        elif opcao == 6:
+                        elif opcao == 5:
                             break
                         else:
                             print("Opção inválida")
@@ -287,7 +281,7 @@ class Main():
 
         while True:
             print("O que deseja alterar? \n")
-            print("1 - Nome\n2 - CPF\n3 - Idade\n4 - ID\n5 - Senha\n6 - Salario\n7 - Cargo\n8 - Sair")
+            print("1 - Nome\n2 - CPF\n3 - Idade\n4 - Senha\n5 - Salario\n6 - Cargo\n7 - Sair")
             opcao = int(input("Digite a opção desejada: "))
             if opcao == 1:
                 nome = input("Digite o novo nome: ")
@@ -298,15 +292,8 @@ class Main():
             elif opcao == 3:
                 idade = input("Digite a nova idade: ")
                 self.funcionario.set_idade(idade)
+
             elif opcao == 4:
-                id = input("Digite o novo id: ")
-                while id in self.ids_cadastrados and id != self.funcionario.get_id_pessoa() and id == '0':
-                    print("ID já cadastrado")
-                    id = input("Digite um ID: ")
-                #remover o id da lista de ids
-                self.ids_cadastrados.remove(self.funcionario.get_id_pessoa())
-                self.funcionario.set_id_pessoa(id)
-            elif opcao == 5:
                 senha = input("Digite a nova senha: ")
                 self.funcionario.set_senha(senha)
                 while senha in self.senhas_cadastrados and senha != self.funcionario.get_senha():
@@ -315,10 +302,10 @@ class Main():
                 #remover a senha da lista de senhas
                 self.senhas_cadastrados.remove(self.funcionario.get_senha())
                 self.funcionario.set_senha(senha)
-            elif opcao == 6:
+            elif opcao == 5:
                 salario = input("Digite o novo salario: ")
                 self.funcionario.set_salario(salario)
-            elif opcao == 7:
+            elif opcao == 6:
                 print("\n\n1 - Administrador\n2 - Operador\n")
                 opcao = int(input("Digite o cargo: "))
                 if opcao == 1:
@@ -342,33 +329,49 @@ class Main():
         id = input("Digite o id do cliente que deseja excluir: ")
         for cliente in self.lista_Clientes:
             if cliente.get_id_pessoa() == id:
-                self.cliente = cliente
-            else:
-                print("Cliente não encontrado")
+                self.lista_Clientes.remove(cliente)
+                # remover o id da lista de ids
+                self.ids_cadastrados.remove(cliente.get_id_pessoa())
+                # remover a senha da lista de senhas
+                self.senhas_cadastrados.remove(cliente.get_senha())
+                print("Cliente excluído com sucesso")
                 self.menu_Funcionario()
-        self.lista_Clientes.remove(self.cliente)
-        #remover o id antigo da lista de ids
-        self.ids_cadastrados.remove(self.cliente.get_id_pessoa())
-        #remover a senha antiga da lista de senhas
-        self.senhas_cadastrados.remove(self.cliente.get_senha())
-        print("Cliente excluido com sucesso")
-        self.menu_Funcionario()
+                return # sair do método após remover o cliente
+            print("Cliente não encontrado")
+            self.menu_Funcionario()
+
     
     def excluir_Funcionario(self): # Exclui um funcionario
         id = input("Digite o id do funcionario que deseja excluir: ")
         for funcionario in self.lista_Funcionarios:
             if funcionario.get_id_pessoa() == id:
-                self.funcionario = funcionario
-            else:
-                print("Funcionario não encontrado")
+                self.lista_Funcionarios.remove(funcionario)
+                # remover o id da lista de ids
+                self.ids_cadastrados.remove(funcionario.get_id_pessoa())
+                # remover a senha da lista de senhas
+                self.senhas_cadastrados.remove(funcionario.get_senha())
+                print("Funcionário excluído com sucesso")
                 self.menu_Funcionario()
-        self.lista_Funcionarios.remove(self.funcionario)
-        #remover o id da lista de ids
-        self.ids_cadastrados.remove(self.funcionario.get_id_pessoa())
-        #remover a senha da lista de senhas
-        self.senhas_cadastrados.remove(self.funcionario.get_senha())
-        print("Funcionário excluido com sucesso")
+                return # sair do método após remover o funcionário
+        print("Funcionário não encontrado")
         self.menu_Funcionario()
+
+        
+
+        #id = input("Digite o id do funcionario que deseja excluir: ")
+        #for funcionario in self.lista_Funcionarios:
+        #    if funcionario.get_id_pessoa() == id:
+        #        self.funcionario = funcionario
+        #    else:
+        #        print("Funcionario não encontrado")
+        #        self.menu_Funcionario()
+        #self.lista_Funcionarios.remove(self.funcionario)
+        ##remover o id da lista de ids
+        #self.ids_cadastrados.remove(self.funcionario.get_id_pessoa())
+        ##remover a senha da lista de senhas
+        #self.senhas_cadastrados.remove(self.funcionario.get_senha())
+        #print("Funcionário excluido com sucesso")
+        #self.menu_Funcionario()
 
 ### funções de locação de veículos utilizando a classe Locacao ###:
 
