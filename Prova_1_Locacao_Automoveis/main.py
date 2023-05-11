@@ -356,23 +356,6 @@ class Main():
         print("Funcionário não encontrado")
         self.menu_Funcionario()
 
-        
-
-        #id = input("Digite o id do funcionario que deseja excluir: ")
-        #for funcionario in self.lista_Funcionarios:
-        #    if funcionario.get_id_pessoa() == id:
-        #        self.funcionario = funcionario
-        #    else:
-        #        print("Funcionario não encontrado")
-        #        self.menu_Funcionario()
-        #self.lista_Funcionarios.remove(self.funcionario)
-        ##remover o id da lista de ids
-        #self.ids_cadastrados.remove(self.funcionario.get_id_pessoa())
-        ##remover a senha da lista de senhas
-        #self.senhas_cadastrados.remove(self.funcionario.get_senha())
-        #print("Funcionário excluido com sucesso")
-        #self.menu_Funcionario()
-
 ### funções de locação de veículos utilizando a classe Locacao ###:
 
     def alugar_Veiculo(self): # Função para alugar um veículo
