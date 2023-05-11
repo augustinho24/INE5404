@@ -357,7 +357,6 @@ class Main():
         self.menu_Funcionario()
 
 ### funções de locação de veículos utilizando a classe Locacao ###:
-
     def alugar_Veiculo(self): # Função para alugar um veículo
         id_veiculo = input("Digite o ID do veículo: ")
         # Procura o veículo na lista de veículos disponíveis
