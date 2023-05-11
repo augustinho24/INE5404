@@ -339,7 +339,6 @@ class Main():
                 return # sair do método após remover o cliente
             print("Cliente não encontrado")
             self.menu_Funcionario()
-
     
     def excluir_Funcionario(self): # Exclui um funcionario
         id = input("Digite o id do funcionario que deseja excluir: ")
