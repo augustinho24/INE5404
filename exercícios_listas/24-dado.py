@@ -12,7 +12,7 @@ for i in range (100):
     else:
         jogadas[dado] = 1
 
-print("Valor do daoo mais lançado: ", max(jogadas, key=jogadas.get), " vezes")
+print("Valor do dado mais lançado: ", max(jogadas, key=jogadas.get))
 
 print("Lançamentos: ")
 for i in jogadas:
