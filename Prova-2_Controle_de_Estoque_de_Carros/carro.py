@@ -8,6 +8,12 @@ class Carro:
         self.estado = estado
 
 
+        id = id
+        marca = marca
+        modelo = modelo
+        ano_fabricacao = ano_fabricacao
+        preco = preco
+        estado = estado
 
 
 
