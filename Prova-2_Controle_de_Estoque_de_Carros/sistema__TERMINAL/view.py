@@ -40,8 +40,6 @@ class ViewEstoque:
             exit()
         self.menu()
     
-if __name__ == "__main__":
-    view_estoque = ViewEstoque()
-    view_estoque.menu()
+
 
     
