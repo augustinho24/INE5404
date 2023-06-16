@@ -126,8 +126,6 @@ class ControllerEstoque: # Classe que interage com o usuário e com a classe Est
         else:
             print(f"Nenhum carro da marca '{marca}' encontrado.")
 
-
-
     def remover_carro(self):
         id = int(input("Digite o id do carro: "))
         try:
