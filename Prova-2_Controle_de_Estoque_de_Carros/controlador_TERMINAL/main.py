@@ -27,7 +27,8 @@ class ViewEstoque:
         elif opcao == 2:
             self.controller_estoque.atualizar_carro()
         elif opcao == 3:
-            self.controller_estoque.remover_carro()
+            id_carro = int(input("Digite o id do carro: "))
+            self.controller_estoque.remover_carro(id_carro)
         elif opcao == 4:
             self.controller_estoque.listar_carros()
         elif opcao == 5:
@@ -38,7 +39,6 @@ class ViewEstoque:
             print("Saindo...")
             exit()
         self.menu()
-
     
 if __name__ == "__main__":
     view_estoque = ViewEstoque()

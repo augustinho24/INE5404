@@ -5,98 +5,24 @@ class ControllerEstoque: # Classe que interage com o usuário e com a classe Est
     def __init__(self):
         self.estoque = Estoque()
 
-    def cadastrar_carro(self):
-        while True:
-            try:
-                id = int(input("Digite um id para o carro: "))
-                if self.estoque.verifica_id(id):
-                    print("Erro: id já existente.")
-                else:
-                    break
-            except ValueError:
-                print("Erro: id inválido.")
+### ADAPTAR AS FUNÇÕES PARA INTERFACE GRÁFICA USANDO TKINTER ###
 
-        marca = input("Digite a marca do carro: ")
-        modelo = input("Digite o modelo do carro: ")
-
-        while True:
-            try:
-                ano_fabricacao = int(input("Digite o ano de fabricação do carro: "))
-                break
-            except ValueError:
-                print("Erro: ano de fabricação inválido.")
-
-        while True:
-            try:
-                preco = float(input("Digite o preço do carro: "))
-                break
-            except ValueError:
-                print("Erro: preço inválido.")
-
-        while True:
-            try:
-                opcao = int(input("1 - Novo\n2 - Usado\nDigite a opção desejada: "))
-                if opcao < 1 or opcao > 2:
-                    print("Erro: opção inválida.")
-                else:
-                    break
-            except ValueError:
-                print("Erro: opção inválida.")
-
-        if opcao == 1:
-            estado = "Novo"
-        elif opcao == 2:
-            estado = "Usado"
-
-        carro = Carro(id, marca, modelo, ano_fabricacao, preco, estado)
-        self.estoque.adicionar_carro(carro)
+    def cadastrar_carro(self): ###
+        if self.estoque.verifica_id(id):
+            print("Erro: id já existente.")
+        else:
+            carro = Carro(id, marca, modelo, ano_fabricacao, preco, estado)
+            self.estoque.adicionar_carro(carro)
 
     def atualizar_carro(self):
-        while True:
-            try:
-                id = int(input("Digite o id do carro: "))
-                if self.estoque.verifica_id(id):
-                    break
-                else:
-                    print("Erro: id não encontrado.")
-                    return
-            except ValueError:
-                print("Erro: id inválido.")
+        try:
+            if self.estoque.verifica_id(id):
+                self.estoque.atualizar_carro(id, novo_marca, novo_modelo, novo_ano_fabricacao, novo_preco, novo_estado)
+            else:
+                print("Erro: id não encontrado.")
+        except ValueError:
+            print("Erro: id inválido.")
 
-        novo_marca = input("Digite a nova marca do carro: ")
-        novo_modelo = input("Digite o novo modelo do carro: ")
-
-        while True:
-            try:
-                novo_ano_fabricacao = int(input("Digite o novo ano de fabricação do carro: "))
-                break
-            except ValueError:
-                print("Erro: ano de fabricação inválido.")
-
-        while True:
-            try:
-                novo_preco = float(input("Digite o novo preço do carro: "))
-                break
-            except ValueError:
-                print("Erro: preço inválido.")
-
-        while True:
-            try:
-                opcao = int(input("1 - Novo\n2 - Usado\nDigite a opção desejada: "))
-                if opcao < 1 or opcao > 2:
-                    print("Erro: opção inválida.")
-                else:
-                    break
-            except ValueError:
-                print("Erro: opção inválida.")
-
-        if opcao == 1:
-            novo_estado = "Novo"
-        elif opcao == 2:
-            novo_estado = "Usado"
-
-        self.estoque.atualizar_carro(id, novo_marca, novo_modelo, novo_ano_fabricacao, novo_preco, novo_estado)
-        
     def listar_carros(self):
         if self.estoque.lista_carros:
             for carro in self.estoque.lista_carros:

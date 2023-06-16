@@ -126,17 +126,17 @@ class ControllerEstoque: # Classe que interage com o usuário e com a classe Est
         else:
             print(f"Nenhum carro da marca '{marca}' encontrado.")
 
-    def remover_carro(self):
-        id = int(input("Digite o id do carro: "))
+    def remover_carro(self, id):
         try:
             id = int(id)
-        except ValueError:
-            print("Erro: id inválido.")
-            id = int(input("Digite o id do carro: "))
-        if not self.estoque.verifica_id(id):
-            print("Erro: id não encontrado.")
-            #voltar ao menu
-        self.estoque.remover_carro(id)
+            if self.estoque.verifica_id(id):
+                carro = self.estoque.buscar_carro(id)
+                self.estoque.remover_carro(carro)
+            else:
+                print("Erro: ID não encontrado.")
+        except ValueError or AttributeError:
+            print("Erro: ID inválido.")
+  
 
     def calcular_media_precos(self):
         soma = 0
