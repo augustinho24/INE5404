@@ -26,38 +26,12 @@ class ControllerEstoque: # Classe que interage com o usuário e com a classe Est
             print("Erro: id inválido.")
         
     def listar_carros(self):
-#        carros = self.estoque.lista_carros
-#        if carros:
-#            for carro in carros:
-#                self.exibir_carro(carro)
-#        else:
-#            print("Nenhum carro cadastrado.")
-#
-#    def exibir_carro(self, carro):
-#        print("="*20)
-#        print(f"ID: {carro.id}\n"
-#            f"Marca: {carro.marca}\n"
-#            f"Modelo: {carro.modelo}\n"
-#            f"Ano: {carro.ano_fabricacao}\n"
-#            f"Preço: {carro.preco}\n"
-#            f"Estado: {carro.estado}")
-#        print("="*20, "\n")
         carros = self.estoque.lista_carros
         return carros
 
 
     def listar_carros_por_marca(self, marca):      
         carros_encontrados = [carro for carro in self.estoque.lista_carros if carro.marca == marca]
-        #if carros_encontrados:
-        #    for carro in carros_encontrados:
-        #        print("="*20)
-        #        print(f"ID: {carro.id}\n"
-        #            f"Marca: {carro.marca}\n"
-        #            f"Modelo: {carro.modelo}\n"
-        #            f"Ano: {carro.ano_fabricacao}\n"
-        #            f"Preço: {carro.preco}\n"
-        #            f"Estado: {carro.estado}")
-        #        print("="*20,"\n")
         if not carros_encontrados:
             print("Nenhum carro encontrado.")
         return carros_encontrados
