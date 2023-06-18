@@ -24,10 +24,10 @@ class ViewEstoque:
             ano_fabricacao = int(self.entry_ano_fabricacao.get())
             preco = float(self.entry_preco.get())
             estado = self.entry_estado.get()
-            #if self.estoque.verifica_id(id):
-            #    messagebox.showerror("Erro", "Erro: id já existente.")
-            #elif estado != "Novo" and estado != "Usado":
-            if estado != "Novo" and estado != "Usado" or self.estoque.verifica_id(id):
+            if self.estoque.verifica_id(id):
+                messagebox.showerror("Erro", "Erro: id já existente.")
+            elif estado != "Novo" and estado != "Usado":
+            #if estado != "Novo" and estado != "Usado" or self.estoque.verifica_id(id):
                 messagebox.showerror("Erro", "Erro: estado inválido ou ID já existente.")
             else:
                 self.controller_estoque.cadastrar_carro(id, marca, modelo, ano_fabricacao, preco, estado)
